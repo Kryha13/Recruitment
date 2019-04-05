@@ -2,9 +2,13 @@ from django.contrib import messages
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.shortcuts import render, redirect
 from django.views import generic, View
+from django.http import JsonResponse, HttpResponse
+import json
+from django.core import serializers
 from recruitment.forms import GradeForm
 
 # Create your views here.
+from recruitment.models import Grade, Candidate
 
 
 class MainPageView(generic.TemplateView):
@@ -31,3 +35,26 @@ class AddMarkView(View, PermissionRequiredMixin):
             messages.success(request, 'The grade was successfully added')
             return redirect('/')
         return render(request, self.template_name, {'form': form})
+
+
+class CandidatesListView(View):
+
+    def get(self, request):
+        response = []
+        ids =[]
+        grades = Grade.objects.all()
+        for grade in grades:
+            if grade.candidate.id in ids:
+                pass
+            else:
+                response.append({
+                    "pk": grade.candidate.id,
+                    "full_name": grade.candidate.first_name + ' ' + grade.candidate.last_name,
+                    "grades": [grade.value for grade in Grade.objects.filter(candidate_id=grade.candidate.id)],
+                    "avg_grade": sum([grade.value for grade in Grade.objects.filter(candidate_id=grade.candidate.id)])\
+                                / Grade.objects.filter(candidate_id=grade.candidate.id).count(),
+
+                })
+                ids.append(grade.candidate.id)
+
+        return JsonResponse(response, safe=False)
