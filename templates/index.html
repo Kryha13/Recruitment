@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+     {% if messages %}
+        {% for message in messages %}
+            <font color="red">{{ message }}</font>
+        {% endfor %}
+    {% endif %}
+{% endblock content %}
+
+
+

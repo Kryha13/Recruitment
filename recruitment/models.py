@@ -22,7 +22,7 @@ class Candidate(models.Model):
 class Grade(models.Model):
     value = models.DecimalField(max_digits=2, decimal_places=1)
     task = models.OneToOneField(Task, on_delete=models.CASCADE)
-    candidate = models.ForeignKey(Candidate, on_delete=models.CASCADE)
+    candidate = models.ForeignKey(Candidate, on_delete=models.CASCADE, related_name='candidates')
     recruiter = models.ForeignKey(User, on_delete=models.PROTECT)
 
     def __str__(self):

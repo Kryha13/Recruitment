@@ -2,13 +2,11 @@ from django.contrib import messages
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.shortcuts import render, redirect
 from django.views import generic, View
-from django.http import JsonResponse, HttpResponse
-import json
-from django.core import serializers
+from django.http import JsonResponse
 from recruitment.forms import GradeForm
+from recruitment.models import Grade
 
 # Create your views here.
-from recruitment.models import Grade, Candidate
 
 
 class MainPageView(generic.TemplateView):
@@ -56,5 +54,4 @@ class CandidatesListView(View):
 
                 })
                 ids.append(grade.candidate.id)
-
         return JsonResponse(response, safe=False)
