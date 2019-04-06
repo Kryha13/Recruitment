@@ -6,5 +6,5 @@ https://recruitmenttool.herokuapp.com/
 **For tests:**
 
   -->Superuser
-  **login:** superuser
-  **passsword:** superuser
+  login: superuser
+  passsword: superuser
