@@ -45,12 +45,13 @@ class CandidatesListView(View):
             if grade.candidate.id in ids:
                 pass
             else:
+                avg = float(sum([grade.value for grade in Grade.objects.filter(candidate_id=grade.candidate.id)])\
+                                / Grade.objects.filter(candidate_id=grade.candidate.id).count())
                 response.append({
                     "pk": grade.candidate.id,
                     "full_name": grade.candidate.first_name + ' ' + grade.candidate.last_name,
-                    "grades": [grade.value for grade in Grade.objects.filter(candidate_id=grade.candidate.id)],
-                    "avg_grade": sum([grade.value for grade in Grade.objects.filter(candidate_id=grade.candidate.id)])\
-                                / Grade.objects.filter(candidate_id=grade.candidate.id).count(),
+                    "grades": [float(grade.value) for grade in Grade.objects.filter(candidate_id=grade.candidate.id)],
+                    "avg_grade": round(avg, 2),
 
                 })
                 ids.append(grade.candidate.id)
