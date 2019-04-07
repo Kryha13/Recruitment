@@ -28,7 +28,7 @@ SECRET_KEY = 'vh+)pnt1f843pd70&9=0lagvh&2d2ujg=ln=!1u-hj73j)3bs_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'recruitmenttool.herokuapp.com', '185.238.74.102',’krystian.clevertool.pl’]
+ALLOWED_HOSTS = ['127.0.0.1', 'recruitmenttool.herokuapp.com', '185.238.74.102','krystian.clevertool.pl']
 
 # Application definition
 
